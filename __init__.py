@@ -1,5 +1,7 @@
 import requests as r
+import datetime
 import json
+import formatdate
 
 class Nomie:
   url = ''
@@ -46,10 +48,18 @@ class Nomie:
         timeOf = items['rows'][i]['id'][29:42]
         items['rows'][i]['name'] = self.getName(items['rows'][i]['id'][8:28])
         items['rows'][i]['time'] = timeOf
+        dateOf = datetime.datetime.fromtimestamp(float(timeOf)/1000.0)
+        dateFormatter = formatdate.FormatDate()
+        strDate = dateFormatter.format(dateOf.year, dateOf.month, dateOf.day, dateOf.hour, dateOf.minute, dateOf.second)
+        items['rows'][i]['date'] = strDate
       elif idName[5:7] == 'tm':
         timeOf = items['rows'][i]['id'][8:21]
         items['rows'][i]['name'] = self.getName(items['rows'][i]['id'][22:42])
         items['rows'][i]['time'] = timeOf
+        dateOf = datetime.datetime.fromtimestamp(float(timeOf)/1000.0)
+        dateFormatter = formatdate.FormatDate()
+        strDate = dateFormatter.format(dateOf.year, dateOf.month, dateOf.day, dateOf.hour, dateOf.minute, dateOf.second)
+        items['rows'][i]['date'] = strDate
       else:
         print "Unknown case!!!!!"
     return items
