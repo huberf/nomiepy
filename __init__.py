@@ -5,18 +5,26 @@ import formatdate
 
 class Nomie:
   url = ''
-  def __init__(self, urlWithPort):
+  username = ''
+  def __init__(self, urlWithPort, username):
     if urlWithPort[0:4] == 'http':
       self.url = urlWithPort
     else:
       self.url = 'http://' + urlWithPort
+    self.username = username
+
+  def getTrackers(self):
+    response = r.get(self.url + '/' + self.username + '_trackers/_all_docs')
+    ids = json.loads(response.text)
+    trackerNames = []
+    for i in ids['rows']:
+      trackerDetails = r.get(self.url + '/' + self.username + '_trackers/' + i['id']);
+      details = json.loads(trackerDetails.text)
+      trackerNames += [{'id': i['id'], 'label': details['label'], 'type': details['config']['type']}]
+    return trackerNames
 
   def getAllEvents(self):
-    response =  r.get(self.url + '/nomie_events/_all_docs')
-    return response.text
-  
-  def getAllTrackers(self):
-    response =  r.get(self.url + '/nomie_trackers/_all_docs')
+    response =  r.get(self.url + '/' + self.username + '_events/_all_docs')
     return response.text
 
   def backup(self, filename):
@@ -24,13 +32,17 @@ class Nomie:
     fileToWrite = open(filename, 'w')
     fileToWrite.write(listOfEvents)
 
-  def eventObject(self):
+  def eventObjects(self):
     objects = json.loads(self.getAllEvents())
     return objects
-  
+
   def saveTrackers(self):
-    trackers = self.getAllTrackers()
-    fileToWrite = open('trackers.json', 'w')
+    allTrackers = self.getTrackers()
+    trackers = {}
+    for i in allTrackers:
+      trackers[i['id']] = i['label']
+    trackers = json.dumps(trackers)
+    fileToWrite = open('trackernames.json', 'w')
     fileToWrite.write(trackers)
 
   def getName(self, id):
