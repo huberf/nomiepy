@@ -49,7 +49,10 @@ class Nomie:
     fileOfNames = open('trackernames.json', 'r')
     contents = fileOfNames.read()
     names = json.loads(contents)
-    return names[id]
+    try:
+        return names[id]
+    except:
+        return 'deleted'
 
   def eventList(self):
     items = self.getAllEvents()
@@ -57,9 +60,10 @@ class Nomie:
     for i in range(len(items['rows'])):
       idName = items['rows'][i]['id']
       if idName[5:7] == 'pr':
-        timeOf = items['rows'][i]['id'][29:42]
-        items['rows'][i]['name'] = self.getName(items['rows'][i]['id'][8:28])
+        timeOf = items['rows'][i]['id'].split('|')[3]
+        items['rows'][i]['name'] = self.getName(items['rows'][i]['id'].split('|')[2])
         items['rows'][i]['time'] = timeOf
+        print timeOf
         dateOf = datetime.datetime.fromtimestamp(float(timeOf)/1000.0)
         dateFormatter = formatdate.FormatDate()
         strDate = dateFormatter.format(dateOf.year, dateOf.month, dateOf.day, dateOf.hour, dateOf.minute, dateOf.second)
