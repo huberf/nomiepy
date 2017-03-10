@@ -13,6 +13,10 @@ class Nomie:
       self.url = 'http://' + urlWithPort
     self.username = username
 
+  def setup(self):
+    self.saveTrackers()
+    return True
+
   def getTrackers(self):
     response = r.get(self.url + '/' + self.username + '_trackers/_all_docs')
     ids = json.loads(response.text)
