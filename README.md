@@ -16,7 +16,7 @@ A minimal python library for accessing Nomie data stored in CouchDB.
   happened.
 
 ## (Optional) Setup from source
-* First clone this repository with `git clone https://githbub.com/huberf/nomiepy`
+* First clone this repository with `git clone https://github.com/huberf/nomiepy`
 * To setup your trackers, you will need to open the `setup.py` file and fill in
   the URL for you CouchDB instance as well as the username you have. No password
   is required. Make sure to include the port in your URL.
