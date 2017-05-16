@@ -89,3 +89,6 @@ class Nomie:
       else:
         print "Unknown case!!!!!"
     return items
+
+def test_module():
+    print("Success...")

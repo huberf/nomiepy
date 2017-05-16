@@ -2,7 +2,7 @@
 A minimal python library for accessing Nomie data stored in CouchDB.
 
 ## Setup
-* First, `pip install pynomie`
+* First, `pip install nomiepy`
 * Now, you will just need your Mongo DB URL and the username for that DB.
 * More instructions coming soon...
 
