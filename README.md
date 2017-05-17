@@ -4,7 +4,10 @@ A minimal python library for accessing Nomie data stored in CouchDB.
 ## Setup
 * First, `pip install nomiepy`
 * Now, you will just need your Mongo DB URL and the username for that DB.
-* More instructions coming soon...
+* To test open up the Python shell or write a short script using instructions below.
+* Instantiate a Nomie object like so `myNomie = nomiepy.Nomie('db url', 'username')
+* For speed, one must cache the trackers in whatever directory you are computing in. To do this you need to run the following command using the object instantiation above. Do this by running `myNomie.saveTrackers()`
+* You are now ready to use any of the available methods.
 
 ## Basic Operations
 * To get a list of every single event you tracked, the `eventList` function is
