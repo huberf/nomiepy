@@ -18,6 +18,18 @@ A minimal python library for accessing Nomie data stored in CouchDB.
   to check for everytime you did a specific action as well as view the time it
   happened.
 
+## Getting Started
+Here is a short script that should get you going on your path of self
+realization.
+```
+import nomiepy
+# Replace items with the server URl and your database username
+myNomie = nomiepy.Nomie('http://yourCouchServer:5984', 'username')
+allEvents = myNomie.eventLis()
+```
+The allEvents variable now contains everything you've tracked including the set
+tracker name.
+
 ## (Optional) Setup from source
 * First clone this repository with `git clone https://github.com/huberf/nomiepy`
 * To setup your trackers, you will need to open the `setup.py` file and fill in
