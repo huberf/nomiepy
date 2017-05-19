@@ -57,7 +57,11 @@ class Nomie:
     fileToWrite.write(trackers)
 
   def getName(self, id):
-    fileOfNames = open('trackernames.json', 'r')
+    try:
+        fileOfNames = open('trackernames.json', 'r')
+    except:
+        print("trackernames.json wasn't available. Saving version to working directory.")
+        self.saveTrackers()
     contents = fileOfNames.read()
     names = json.loads(contents)
     try:
@@ -87,7 +91,7 @@ class Nomie:
         strDate = dateFormatter.format(dateOf.year, dateOf.month, dateOf.day, dateOf.hour, dateOf.minute, dateOf.second)
         items['rows'][i]['date'] = strDate
       else:
-        print "Unknown case!!!!!"
+        print("Unknown case!!!!!")
     return items
 
 def test_module():
